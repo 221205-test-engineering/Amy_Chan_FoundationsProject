@@ -28,12 +28,12 @@ public class BugCatcherRunner {
         homePage = new HomePage(driver);
     }
 
-    @After
-    public void cleanup(){
-        if(homePage.logoutBtn!= null){
-            homePage.logoutBtn.click();
-        }
-    }
+//    @After
+//    public void cleanup(){
+//        if(homePage.logoutBtn!= null){
+//            homePage.logoutBtn.click();
+//        }
+//    }
     @AfterClass
     public static void teardown() {
         driver.quit();
