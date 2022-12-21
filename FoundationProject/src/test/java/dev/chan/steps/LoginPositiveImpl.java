@@ -10,6 +10,7 @@ import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
@@ -25,15 +26,18 @@ public class LoginPositiveImpl {
     @Given("The employee is on the login page")
     public void the_employee_is_on_the_login_page() {
         driver.get("https://bugcatcher-dan.coe.revaturelabs.com/?dev=18");
+
     }
 
     @When("The employee types {string} into username input")
     public void the_employee_types_into_username_input(String username) {
+        loginPage.usernameField.clear();
         loginPage.usernameField.sendKeys("g8tor");
     }
 
     @When("The employee types {string} into password input")
     public void the_employee_types_into_password_input(String password) {
+        loginPage.passwordField.clear();
         loginPage.passwordField.sendKeys("chomp!");
     }
 
@@ -45,12 +49,12 @@ public class LoginPositiveImpl {
     @Then("the employee should be on the {string} page")
     public void the_employee_should_be_on_the_role_page (String role) {
 
-        new FluentWait<WebDriver>(driver)
-                .withTimeout(Duration.ofSeconds(10)) // how long in total to wait for the page/DOM to load
-                .pollingEvery(Duration.ofSeconds(2)) // during those 10 seconds - we are looking at the DOM every 2 seconds
-                .ignoring(ElementNotInteractableException.class) // if any exception occurs - we ignore it and keep polling
-                .until(ExpectedConditions.visibilityOf(homePage.welcomeMsg));
-        assertEquals("Manager Home", driver.getTitle());
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(homePage.welcomeMsg));
+        String actualTitle = driver.getTitle();
+        assertEquals("Manager Home", actualTitle);
+
     }
 
     @Then("The employee should see their name {string} {string} on the home page")

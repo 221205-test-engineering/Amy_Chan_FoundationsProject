@@ -7,9 +7,9 @@ Feature: Login
     When The employee clicks on the login button
     Then The employee should see an alert saying they have the wrong password
 
-#  Scenario: Login Wrong Username Correct Password
-#    When The employee types in sicEmDawgs into the username input
-#    When The employee types in natchamps into the password input
-#    When The employee clicks on the login button
-#    Then The employee should see an alert saying no user with that username found
-#
+  Scenario: Login Wrong Username Correct Password
+    When The employee types in sicEmDawgs into the username input
+    When The employee types in natchamps into the password input
+    When The employee clicks on the login button
+    Then The employee should see an alert saying no user with that username found
+

@@ -26,11 +26,10 @@ public class BugCatcherRunner {
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
-
     }
 
     @After
-    public void logout(){
+    public void cleanup(){
         if(homePage.logoutBtn!= null){
             homePage.logoutBtn.click();
         }
