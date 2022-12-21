@@ -14,10 +14,23 @@ public class MatrixPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath="//*[@id=\"collapsible-trigger-1671644826966\"]/button")
+    @FindBy(xpath="(//button[text()=\"Show\"])[1]")
     public WebElement showAirlineMatrixBtn;
-    //*[@id="collapsible-content-1671644826966"]/div/table/tbody/tr[2]/td[6]/button
 
-    @FindBy(xpath="//*[@id=\"collapsible-content-1671645238313\"]/div/table/tbody/tr[1]/td[6]/button")
+    @FindBy(xpath="(//button[text()=\"Edit\"])[1]")
     public WebElement editAirlineFirstRuleBtn;
+
+    @FindBy(xpath = "/html/body/div/ul/li[1]/div/div/div/ul[1]/li/input")
+    public WebElement testCaseIDField;
+
+    @FindBy(xpath = "/html/body/div/ul/li[1]/div/div/div/ul[1]/li/button")
+    public WebElement addTestCaseBtn;
+    @FindBy(xpath = "/html/body/div/ul/li[1]/div/div/div/ul[2]/li/input")
+    public WebElement defectIDField;
+
+    @FindBy(xpath="/html/body/div/ul/li[1]/div/div/div/ul[2]/li/button")
+    public WebElement addDefectBtn;
+
+    @FindBy(xpath = "/html/body/div/ul/li[1]/div/div/div/button")
+    public WebElement saveBtn;
 }

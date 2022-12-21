@@ -3,6 +3,7 @@ package dev.chan.runners;
 import dev.chan.pages.HomePage;
 import dev.chan.pages.LoginPage;
 import dev.chan.pages.MatrixPage;
+import io.cucumber.java.it.Ma;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -29,14 +30,9 @@ public class BugCatcherRunner {
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
+        matrixPage = new MatrixPage(driver);
     }
 
-//    @After
-//    public void cleanup(){
-//        if(homePage.logoutBtn!= null){
-//            homePage.logoutBtn.click();
-//        }
-//    }
     @AfterClass
     public static void teardown() {
         driver.quit();

@@ -68,36 +68,50 @@ public class MatrixImpl {
     @Given("The manager is on the matrix homepage")
     public void the_manager_is_on_the_matrix_homepage() {
         homePage.matricesLink.click();
+        System.out.println(driver.getTitle());
     }
 
     @Given("The manager has selected the matrix")
     public void the_manager_has_selected_the_matrix() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(matrixPage.showAirlineMatrixBtn));
         matrixPage.showAirlineMatrixBtn.click();
 
     }
 
     @When("The manager adds a defect")
     public void the_manager_adds_a_defect() {
-        //pick defect 901
-        //click on add btn
-
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(matrixPage.editAirlineFirstRuleBtn));
+        matrixPage.editAirlineFirstRuleBtn.click();
+        matrixPage.defectIDField.sendKeys("901");
+        matrixPage.addDefectBtn.click();
     }
 
     @When("The manager confirms their changes")
     public void the_manager_confirms_their_changes() {
-
+        matrixPage.saveBtn.click();
     }
 
     @Then("Then the matrix should saved")
     public void then_the_matrix_should_saved() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.alertIsPresent());
+        String actualAlert = driver.switchTo().alert().getText();
 
+        assertEquals("Matrix Saved", actualAlert);
+        driver.switchTo().alert().accept();
     }
 
 
     // For scenario: Update test cases
     @When("The manager adds a Test Cases")
     public void the_manager_adds_a_test_cases() {
-
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(matrixPage.editAirlineFirstRuleBtn));
+        matrixPage.editAirlineFirstRuleBtn.click();
+        matrixPage.testCaseIDField.sendKeys("801");
+        matrixPage.addTestCaseBtn.click();
     }
 
 }
