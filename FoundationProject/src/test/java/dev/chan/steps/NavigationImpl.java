@@ -41,7 +41,7 @@ public class NavigationImpl {
         System.out.println("Manager is now on :" + managerHomeTitle);
     }
 
-    // Homepage links visible
+    // For Scenario: Homepage links visible
     @Then("The manager should see links for Matrices, Test Cases, Defect Reporting and Defect Overview")
     public void the_manager_should_see_links_for_matrices_test_cases_defect_reporting_and_defect_overview() {
 
@@ -57,7 +57,7 @@ public class NavigationImpl {
 
     }
 
-    // Back Navigation
+    // For Scenario: Back Navigation
     @When("The manager clicks on Matrices")
     public void the_manager_clicks_on_matrices() {
         homePage.matricesLink.click();
@@ -82,7 +82,7 @@ public class NavigationImpl {
     }
 
 
-    // All links viable
+    // For Scenario: All links viable
     @When("The manager clicks on {string}")
     public void the_manager_clicks_on(String linkTxt) {
         WebElement targetLink = driver.findElement(By.linkText(linkTxt));

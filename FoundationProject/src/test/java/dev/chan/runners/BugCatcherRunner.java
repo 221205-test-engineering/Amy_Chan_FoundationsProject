@@ -2,6 +2,7 @@ package dev.chan.runners;
 
 import dev.chan.pages.HomePage;
 import dev.chan.pages.LoginPage;
+import dev.chan.pages.MatrixPage;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -19,6 +20,8 @@ public class BugCatcherRunner {
 
     public static LoginPage loginPage;
     public static HomePage homePage;
+
+    public static MatrixPage matrixPage;
 
     @BeforeClass
     public static void setup() {

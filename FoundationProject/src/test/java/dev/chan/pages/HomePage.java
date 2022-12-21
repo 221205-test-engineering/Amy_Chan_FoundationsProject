@@ -29,5 +29,19 @@ public class HomePage {
     @FindBy(xpath = "//a[5]")
     public WebElement logoutBtn;
 
+    @FindBy(xpath = "//*[@id=\"root\"]/button")
+    public WebElement newMatrixBtn;
+
+    @FindBy(xpath = "//*[@id=\"root\"]/input")
+    public WebElement matrixTitleField;
+
+    @FindBy(xpath = "//*[@id=\"root\"]/fieldset/table/tbody/tr/td[1]/input")
+    public WebElement userStoryField;
+
+    @FindBy(xpath = "//*[@id=\"root\"]/fieldset/button")
+    public WebElement addRequirementBtn;
+
+    @FindBy(xpath = "//*[@id=\"root\"]/button")
+    public WebElement createMatrixBtn;
 
 }

@@ -36,8 +36,8 @@ public class LoginNegativeImpl {
     @Then("The employee should see an alert saying they have the wrong password")
     public void the_employee_should_see_an_alert_saying_they_have_the_wrong_password() {
         new FluentWait<WebDriver>(driver)
-                .withTimeout(Duration.ofSeconds(10))
-                .pollingEvery(Duration.ofSeconds(2))
+                .withTimeout(Duration.ofSeconds(5))
+                .pollingEvery(Duration.ofSeconds(1))
                 .ignoring(ElementNotInteractableException.class)
                 .until(ExpectedConditions.alertIsPresent());
         String expectedMsg = "Wrong password for User";
@@ -63,8 +63,8 @@ public class LoginNegativeImpl {
     @Then("The employee should see an alert saying no user with that username found")
     public void the_employee_should_see_an_alert_saying_no_user_with_that_username_found() {
         new FluentWait<WebDriver>(driver)
-                .withTimeout(Duration.ofSeconds(10))
-                .pollingEvery(Duration.ofSeconds(2))
+                .withTimeout(Duration.ofSeconds(5))
+                .pollingEvery(Duration.ofSeconds(1))
                 .ignoring(ElementNotInteractableException.class)
                 .until(ExpectedConditions.alertIsPresent());
 

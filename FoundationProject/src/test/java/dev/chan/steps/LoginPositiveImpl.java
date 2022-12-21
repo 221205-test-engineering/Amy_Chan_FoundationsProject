@@ -30,17 +30,17 @@ public class LoginPositiveImpl {
     @When("The employee types {string} into username input")
     public void the_employee_types_into_username_input(String username) {
         loginPage.usernameField.clear();
-        loginPage.usernameField.sendKeys("g8tor");
+        loginPage.usernameField.sendKeys(username);
     }
 
     @When("The employee types {string} into password input")
     public void the_employee_types_into_password_input(String password) {
         loginPage.passwordField.clear();
-        loginPage.passwordField.sendKeys("chomp!");
+        loginPage.passwordField.sendKeys(password);
     }
 
     @When("The employee clicks on the login button")
-    public void the_employee_clicks_on_the_login_button() throws InterruptedException {
+    public void the_employee_clicks_on_the_login_button() {
         loginPage.loginBtn.click();
     }
 
@@ -51,13 +51,13 @@ public class LoginPositiveImpl {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(homePage.welcomeMsg));
         String actualTitle = driver.getTitle();
-        assertEquals("Manager Home", actualTitle);
+        assertEquals(role+" Home", actualTitle);
 
     }
 
     @Then("The employee should see their name {string} {string} on the home page")
     public void the_employee_should_see_their_name_fname_lname_on_the_home_page (String fname, String lname) {
-        assertEquals("Welcome Patty Pastiche", homePage.welcomeMsg.getText());
+        assertEquals("Welcome "+ fname+" "+ lname, homePage.welcomeMsg.getText());
     }
 
 }
