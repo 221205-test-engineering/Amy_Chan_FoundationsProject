@@ -1,17 +1,14 @@
 package dev.chan.steps;
 
-import dev.chan.pages.HomePage;
-import dev.chan.pages.LoginPage;
-import dev.chan.pages.MatrixPage;
-import dev.chan.pages.TestCasesPage;
+import dev.chan.pages.*;
 import dev.chan.runners.BugCatcherRunner;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -26,142 +23,180 @@ public class TestCasesImpl {
     public MatrixPage matrixPage = BugCatcherRunner.matrixPage;
     public TestCasesPage testCasesPage = BugCatcherRunner.testCasesPage;
 
+    public CaseEditorPage caseEditorPage = BugCatcherRunner.caseEditorPage;
+
     // For Scenario: Add a test case
     @Given("The tester is on the test case dashboard")
     public void the_tester_is_on_the_test_case_dashboard() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        driver.get("https://bugcatcher-dan.coe.revaturelabs.com/?dev=18");
+        loginPage.usernameField.clear();
+        loginPage.usernameField.sendKeys("ryeGuy");
+        loginPage.passwordField.clear();
+        loginPage.passwordField.sendKeys("coolbeans");
+        loginPage.loginBtn.click();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(homePage.testCasesLink));
+        homePage.testCasesLink.click();
     }
     @When("The tester types Description into input with")
-    public void the_tester_types_description_into_input_with(String docString) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_tester_types_description_into_input_with(String description) throws InterruptedException {
+        testCasesPage.description.sendKeys(description);
+        Thread.sleep(1000);
     }
     @When("The tester types Steps into input with")
-    public void the_tester_types_steps_into_input_with(String docString) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_tester_types_steps_into_input_with(String steps) {
+        testCasesPage.steps.sendKeys(steps);
     }
     @When("The tester presses the submit button")
     public void the_tester_presses_the_submit_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        testCasesPage.submitBtn.click();
+
     }
     @Then("The test case should appear at the bottom of the table")
     public void the_test_case_should_appear_at_the_bottom_of_the_table() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.refreshed(
+                ExpectedConditions.visibilityOf(testCasesPage.bottomDescription)));
+        String expectedDescription = "Verify that usernames cannot have illegal characters";
+        String actualDescription = testCasesPage.bottomDescription.getText();
+        assertEquals(expectedDescription, actualDescription);
     }
     @Then("The test case result should say UNEXECUTED")
     public void the_test_case_result_should_say_unexecuted() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertEquals("UNEXECUTED", testCasesPage.bottomResult.getText());
     }
 
     // For Scenario: Update a Test Case
     @When("The tester presses on details")
     public void the_tester_presses_on_details() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(testCasesPage.bottomDetailButton));
+        testCasesPage.bottomDetailButton.click();
+
     }
     @Then("A test case modal should appear showing the case ID")
     public void a_test_case_modal_should_appear_showing_the_case_id() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(testCasesPage.modalDialog));
+
+        boolean modalIsPresent = false;
+        if(testCasesPage.modalDialog!=null){
+            modalIsPresent = true;
+        }
+
+        assertTrue(modalIsPresent);
     }
     @Then("The performed by field should say No One")
     public void the_performed_by_field_should_say_no_one() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertEquals("No One", testCasesPage.performedBy.getText());
+
     }
-    @When("The tester presses the close buttton")
-    public void the_tester_presses_the_close_buttton() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @When("The tester presses the close button")
+    public void the_tester_presses_the_close_button() {
+        testCasesPage.closeBtn.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.invisibilityOf(testCasesPage.modalDialog));
+
     }
     @Then("The Modal Should be closed")
     public void the_modal_should_be_closed() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        boolean modalClosed = false;
+
+        try{
+            boolean modalDisplayed= testCasesPage.modalDialog.isDisplayed();
+        }catch (NoSuchElementException e){
+            e.toString();
+            modalClosed = true;
+        }
+
+        assertTrue(modalClosed);
     }
 
 
     // For Scenario: Edit Existing Case
     @When("The Tester clicks on edit within the modal")
     public void the_tester_clicks_on_edit_within_the_modal() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+       testCasesPage.editBtn.click();
     }
     @Then("The Tester should be on the case editor for that case")
     public void the_tester_should_be_on_the_case_editor_for_that_case() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.urlContains("caseeditor"));
+        String actualTitle = driver.getTitle();
+        System.out.println(actualTitle);
+        assertEquals("Case Editor", actualTitle);
     }
+
+
     @When("The tester clicks on the edit button")
     public void the_tester_clicks_on_the_edit_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(caseEditorPage.editBtn));
+        caseEditorPage.editBtn.click();
     }
     @When("The tester types in {string} into the description text area")
-    public void the_tester_types_in_into_the_description_text_area(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_tester_types_in_into_the_description_text_area(String description) {
+        caseEditorPage.descriptionBox.sendKeys(description);
+
     }
     @When("The tester types in {string} into the steps text area")
-    public void the_tester_types_in_into_the_steps_text_area(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_tester_types_in_into_the_steps_text_area(String steps) {
+        caseEditorPage.stepsBox.sendKeys(steps);
     }
     @When("The tester clicks on the automated check mark")
     public void the_tester_clicks_on_the_automated_check_mark() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        caseEditorPage.checkbox.click();
     }
     @When("The tester selects {string} for performed from drop down")
-    public void the_tester_selects_for_performed_from_drop_down(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_tester_selects_for_performed_from_drop_down(String tester) {
+        Select dropdown = new Select(caseEditorPage.performBy);
+        dropdown.selectByVisibleText(tester);
     }
     @When("The tester selects {string} for test result from drop down")
-    public void the_tester_selects_for_test_result_from_drop_down(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_tester_selects_for_test_result_from_drop_down(String result) {
+        Select dropdown = new Select(caseEditorPage.testResult);
+        dropdown.selectByVisibleText(result);
     }
     @When("The tester types in {string} into the summary text area")
-    public void the_tester_types_in_into_the_summary_text_area(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_tester_types_in_into_the_summary_text_area(String summary) {
+        caseEditorPage.summary.sendKeys(summary);
     }
     @When("The tester clicks save on test case page")
     public void the_tester_clicks_save_on_test_case_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        caseEditorPage.saveBtn.click();
     }
     @Then("A confirmation prompt should appear")
     public void a_confirmation_prompt_should_appear() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.alertIsPresent());
+        String alertMsg = driver.switchTo().alert().getText();
+        String expectedMsg = "Are you sure you want to update the test case?";
+        assertEquals(expectedMsg, alertMsg);
     }
     @When("The tester clicks on Ok")
     public void the_tester_clicks_on_ok() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        driver.switchTo().alert().accept();
     }
     @Then("An alert says the test case has been saved")
     public void an_alert_says_the_test_case_has_been_saved() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.alertIsPresent());
+        String alertMsg = driver.switchTo().alert().getText();
+        String expectedMsg = "Test Case has been Saved";
+        assertEquals(expectedMsg, alertMsg);
+        driver.switchTo().alert().accept();
     }
 
     // For Scenario: Reset Test Case
     @When("The tester clicks on the reset button")
     public void the_tester_clicks_on_the_reset_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        caseEditorPage.resetBtn.click();
     }
     @Then("The fields should be populated to their old values")
     public void the_fields_should_be_populated_to_their_old_values() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        WebElement resetResult = driver.findElement(By.xpath("//fieldset[2]/p"));
+        String resetResultText = resetResult.getText();
+        assertEquals("PASS", resetResultText);
     }
 }

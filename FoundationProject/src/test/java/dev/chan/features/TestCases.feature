@@ -23,7 +23,7 @@ Feature: Test Cases
     When The tester presses on details
     Then A test case modal should appear showing the case ID
     Then The performed by field should say No One
-    When The tester presses the close buttton
+    When The tester presses the close button
     Then The Modal Should be closed
 
   Scenario: Edit Existing Case

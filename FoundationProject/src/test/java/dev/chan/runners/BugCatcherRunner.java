@@ -1,16 +1,10 @@
 package dev.chan.runners;
 
-import dev.chan.pages.HomePage;
-import dev.chan.pages.LoginPage;
-import dev.chan.pages.MatrixPage;
-import dev.chan.pages.TestCasesPage;
-import io.cucumber.java.it.Ma;
+import dev.chan.pages.*;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -23,7 +17,7 @@ public class BugCatcherRunner {
     public static HomePage homePage;
     public static MatrixPage matrixPage;
     public static TestCasesPage testCasesPage;
-
+    public static CaseEditorPage caseEditorPage;
     @BeforeClass
     public static void setup() {
         WebDriverManager.chromedriver().setup();
@@ -32,6 +26,7 @@ public class BugCatcherRunner {
         homePage = new HomePage(driver);
         matrixPage = new MatrixPage(driver);
         testCasesPage = new TestCasesPage(driver);
+        caseEditorPage = new CaseEditorPage(driver);
     }
 
     @AfterClass
