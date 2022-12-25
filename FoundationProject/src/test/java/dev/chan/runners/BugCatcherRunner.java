@@ -18,6 +18,8 @@ public class BugCatcherRunner {
     public static MatrixPage matrixPage;
     public static TestCasesPage testCasesPage;
     public static CaseEditorPage caseEditorPage;
+
+    public static DefectReporterPage defectReporterPage;
     @BeforeClass
     public static void setup() {
         WebDriverManager.chromedriver().setup();
@@ -27,6 +29,7 @@ public class BugCatcherRunner {
         matrixPage = new MatrixPage(driver);
         testCasesPage = new TestCasesPage(driver);
         caseEditorPage = new CaseEditorPage(driver);
+        defectReporterPage = new DefectReporterPage(driver);
     }
 
     @AfterClass

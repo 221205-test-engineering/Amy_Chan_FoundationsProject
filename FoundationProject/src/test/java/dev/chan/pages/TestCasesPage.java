@@ -22,7 +22,7 @@ public class TestCasesPage {
     @FindBy(xpath = "//fieldset/button")
     public WebElement submitBtn;
 
-    @FindBy(xpath = "//tbody/tr[last()]/td[2]")
+    @FindBy(xpath = "//tbody/tr[last()]/td[text()=\"Verify that usernames cannot have illegal characters\"]")
     public WebElement bottomDescription;
 
     @FindBy(xpath = "//tbody/tr[last()]/td[3]")

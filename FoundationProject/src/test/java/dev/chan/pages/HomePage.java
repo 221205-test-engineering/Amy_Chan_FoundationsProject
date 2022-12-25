@@ -2,8 +2,11 @@ package dev.chan.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 public class HomePage {
 
@@ -43,5 +46,34 @@ public class HomePage {
 
     @FindBy(xpath = "//*[@id=\"root\"]/button")
     public WebElement createMatrixBtn;
+
+    @FindBy(xpath = "//h3")
+    public WebElement defectList;
+
+    @FindBy(xpath = "//*[@id=\"root\"]/table/tbody/tr[1]")
+    public WebElement firstDefect;
+
+    @FindBy(xpath = "//*[@id=\"root\"]/table/tbody/tr[1]/td[3]/button")
+    public WebElement selectDefectBtn;
+
+    @FindBy(xpath = "//*[@id=\"root\"]/div/h4")
+    public WebElement boldText;
+
+    @FindBy(xpath = "//*[@id=\"root\"]/div/input")
+    public WebElement employeeList;
+
+    @FindBy(xpath = "//*[@id=\"root\"]/div/button")
+    public WebElement assignBtn;
+
+    @FindAll({
+            @FindBy(tagName = "li")
+    })
+    public List<WebElement> allDefectList;
+
+    @FindBy(xpath = "(//button[text()=\"Change Status\"])[1]")
+    public WebElement changeStatusBtn;
+
+    @FindBy(xpath = "(//p/b[2])[1]")
+    public WebElement originalStatus;
 
 }
