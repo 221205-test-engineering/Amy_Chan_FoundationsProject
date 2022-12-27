@@ -34,7 +34,7 @@ public class TestCasesImpl {
         loginPage.passwordField.sendKeys("coolbeans");
         loginPage.loginBtn.click();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(homePage.testCasesLink));
         homePage.testCasesLink.click();
     }
@@ -56,7 +56,7 @@ public class TestCasesImpl {
     }
     @Then("The test case should appear at the bottom of the table")
     public void the_test_case_should_appear_at_the_bottom_of_the_table() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.refreshed(
                 ExpectedConditions.visibilityOf(testCasesPage.bottomDescription)));
         String expectedDescription = "Verify that usernames cannot have illegal characters";
@@ -71,14 +71,14 @@ public class TestCasesImpl {
     // For Scenario: Update a Test Case
     @When("The tester presses on details")
     public void the_tester_presses_on_details() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(testCasesPage.bottomDetailButton));
         testCasesPage.bottomDetailButton.click();
 
     }
     @Then("A test case modal should appear showing the case ID")
     public void a_test_case_modal_should_appear_showing_the_case_id() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(testCasesPage.modalDialog));
 
         boolean modalIsPresent = false;
@@ -96,7 +96,7 @@ public class TestCasesImpl {
     @When("The tester presses the close button")
     public void the_tester_presses_the_close_button() {
         testCasesPage.closeBtn.click();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.invisibilityOf(testCasesPage.modalDialog));
 
     }
@@ -122,7 +122,7 @@ public class TestCasesImpl {
     }
     @Then("The Tester should be on the case editor for that case")
     public void the_tester_should_be_on_the_case_editor_for_that_case() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.urlContains("caseeditor"));
         String actualTitle = driver.getTitle();
         System.out.println(actualTitle);
@@ -132,7 +132,7 @@ public class TestCasesImpl {
 
     @When("The tester clicks on the edit button")
     public void the_tester_clicks_on_the_edit_button() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(caseEditorPage.editBtn));
         caseEditorPage.editBtn.click();
     }
@@ -171,7 +171,7 @@ public class TestCasesImpl {
     }
     @Then("A confirmation prompt should appear")
     public void a_confirmation_prompt_should_appear() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.alertIsPresent());
         String alertMsg = driver.switchTo().alert().getText();
         String expectedMsg = "Are you sure you want to update the test case?";
@@ -183,7 +183,7 @@ public class TestCasesImpl {
     }
     @Then("An alert says the test case has been saved")
     public void an_alert_says_the_test_case_has_been_saved() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.alertIsPresent());
         String alertMsg = driver.switchTo().alert().getText();
         String expectedMsg = "Test Case has been Saved";

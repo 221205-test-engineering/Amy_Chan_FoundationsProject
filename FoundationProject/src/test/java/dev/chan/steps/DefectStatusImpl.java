@@ -29,7 +29,7 @@ public class DefectStatusImpl {
         loginPage.passwordField.sendKeys("coolbeans");
         loginPage.loginBtn.click();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(homePage.welcomeMsg));
         String pageTitle = driver.getTitle();
         System.out.println("Tester is now on :" + pageTitle);

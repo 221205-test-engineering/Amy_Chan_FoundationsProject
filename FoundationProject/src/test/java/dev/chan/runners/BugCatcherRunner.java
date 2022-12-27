@@ -18,7 +18,6 @@ public class BugCatcherRunner {
     public static MatrixPage matrixPage;
     public static TestCasesPage testCasesPage;
     public static CaseEditorPage caseEditorPage;
-
     public static DefectReporterPage defectReporterPage;
     @BeforeClass
     public static void setup() {

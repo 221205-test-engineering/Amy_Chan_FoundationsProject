@@ -35,7 +35,7 @@ public class NavigationImpl {
     }
     @Given("The manager is on the home page")
     public void the_manager_is_on_the_home_page() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(homePage.welcomeMsg));
         String managerHomeTitle = driver.getTitle();
         System.out.println("Manager is now on :" + managerHomeTitle);

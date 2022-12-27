@@ -15,7 +15,7 @@ public class ReportDefectNegativeImpl {
     public void no_confirmation_dialog_appears() {
         boolean noDialog = false;
         try{
-            new WebDriverWait(driver, Duration.ofSeconds(5))
+            new WebDriverWait(driver, Duration.ofSeconds(3))
                     .until(ExpectedConditions.alertIsPresent());
             driver.switchTo().alert().accept();
         }catch  (TimeoutException e){

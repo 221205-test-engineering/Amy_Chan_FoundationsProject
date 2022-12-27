@@ -53,6 +53,7 @@ public class HomePage {
     @FindBy(xpath = "//*[@id=\"root\"]/table/tbody/tr[1]")
     public WebElement firstDefect;
 
+
     @FindBy(xpath = "//*[@id=\"root\"]/table/tbody/tr[1]/td[3]/button")
     public WebElement selectDefectBtn;
 

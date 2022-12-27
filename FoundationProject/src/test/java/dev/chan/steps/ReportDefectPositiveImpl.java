@@ -33,7 +33,7 @@ public class ReportDefectPositiveImpl {
         loginPage.passwordField.sendKeys("coolbeans");
         loginPage.loginBtn.click();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(homePage.reportDefectLink));
         homePage.reportDefectLink.click();
     }
@@ -87,7 +87,7 @@ public class ReportDefectPositiveImpl {
     }
     @Then("There should be a confirmation box")
     public void there_should_be_a_confirmation_box() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.alertIsPresent());
 
         String alertMsg = driver.switchTo().alert().getText();
@@ -100,7 +100,7 @@ public class ReportDefectPositiveImpl {
     }
     @Then("A modal should appear with a Defect ID")
     public void a_modal_should_appear_with_a_defect_id() {
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(defectReporterPage.modal));
         assertNotNull(defectReporterPage.defectCreatedMsg);
 
@@ -111,10 +111,7 @@ public class ReportDefectPositiveImpl {
     }
     @Then("The modal should disappear")
     public void the_modal_should_disappear() {
-//        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
-//        wait.until(ExpectedConditions.not
-//                (ExpectedConditions.visibilityOf(defectReporterPage.modal)));
-//
+
         boolean disappeared = false;
         try {
             boolean displayed = defectReporterPage.modal.isDisplayed();

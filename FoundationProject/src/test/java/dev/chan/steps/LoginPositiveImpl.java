@@ -48,7 +48,7 @@ public class LoginPositiveImpl {
     public void the_employee_should_be_on_the_role_page (String role) {
 
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(homePage.welcomeMsg));
         String actualTitle = driver.getTitle();
         assertEquals(role+" Home", actualTitle);
