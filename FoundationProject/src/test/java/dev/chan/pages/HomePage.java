@@ -1,5 +1,6 @@
 package dev.chan.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -70,6 +71,12 @@ public class HomePage {
             @FindBy(tagName = "li")
     })
     public List<WebElement> allDefectList;
+
+    @FindAll({
+            @FindBy(xpath = "//*[text()='ryeGuy']")
+    })
+    public List<WebElement> totalAssignedList;
+
 
     @FindBy(xpath = "(//button[text()=\"Change Status\"])[1]")
     public WebElement changeStatusBtn;

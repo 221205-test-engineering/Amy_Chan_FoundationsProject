@@ -107,7 +107,7 @@ public class TestCasesImpl {
         try{
             boolean modalDisplayed= testCasesPage.modalDialog.isDisplayed();
         }catch (NoSuchElementException e){
-            e.toString();
+            e.getMessage();
             modalClosed = true;
         }
 

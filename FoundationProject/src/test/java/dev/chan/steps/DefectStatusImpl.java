@@ -38,12 +38,13 @@ public class DefectStatusImpl {
         int totalDefects = homePage.allDefectList.size();
 
         for (int i = 1; i <= totalDefects; i++ ){
-            WebElement li = driver.findElement(By.xpath("//*[@id=\"root\"]/ul/li["+ i +"]"));
+            WebElement li = driver.findElement(By.xpath("//*[@id=\"root\"]/ul//li["+ i +"]"));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            wait.until(ExpectedConditions.elementToBeClickable(li));
             li.click();
         }
 
-        List<WebElement> totalAssignedList = driver.findElements(By.xpath("//*[text()='ryeGuy']"));
-        int totalAssigned = totalAssignedList.size();
+        int totalAssigned = homePage.totalAssignedList.size();
         assertEquals(totalDefects, totalAssigned);
     }
 
@@ -54,12 +55,11 @@ public class DefectStatusImpl {
 
         homePage.changeStatusBtn.click();
         ogStatus = homePage.originalStatus.getText();
-        System.out.println("Original status:" + ogStatus);
+
         for(int i=0; i<homePage.statusBtns.size(); i++){
             WebElement statusBtn = homePage.statusBtns.get(i);
             if(!statusBtn.getText().equals(ogStatus)){
                 newStatus = statusBtn.getText();
-                System.out.println("New status:" + newStatus);
                 statusBtn.click();
                 break;
             }
