@@ -77,4 +77,7 @@ public class HomePage {
     @FindBy(xpath = "(//p/b[2])[1]")
     public WebElement originalStatus;
 
+    @FindAll({@FindBy(xpath = "//li[1]//div/button")})
+    public List<WebElement> statusBtns;
+
 }

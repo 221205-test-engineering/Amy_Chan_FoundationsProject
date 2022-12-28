@@ -44,7 +44,6 @@ public class LoginNegativeImpl {
         String alertMsg = driver.switchTo().alert().getText();
         driver.switchTo().alert().dismiss();
 
-//        System.out.println(alertMsg);
         assertEquals(expectedMsg, alertMsg);
 
     }
@@ -72,10 +71,8 @@ public class LoginNegativeImpl {
         String alertMsg = driver.switchTo().alert().getText();
         driver.switchTo().alert().dismiss();
 
-//        System.out.println(alertMsg);
         assertEquals(expectedMsg, alertMsg);
 
     }
-
-
+    
 }

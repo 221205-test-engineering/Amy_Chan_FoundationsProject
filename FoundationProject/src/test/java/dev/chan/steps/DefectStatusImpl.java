@@ -13,7 +13,7 @@ import java.time.Duration;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 public class DefectStatusImpl {
 
     public WebDriver driver = BugCatcherRunner.driver;
@@ -31,8 +31,6 @@ public class DefectStatusImpl {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(homePage.welcomeMsg));
-        String pageTitle = driver.getTitle();
-        System.out.println("Tester is now on :" + pageTitle);
     }
     @Then("The tester can can see only defects assigned to them")
     public void the_tester_can_can_see_only_defects_assigned_to_them() {
@@ -48,22 +46,33 @@ public class DefectStatusImpl {
         int totalAssigned = totalAssignedList.size();
         assertEquals(totalDefects, totalAssigned);
     }
+
+    public String ogStatus = "";
+    public String newStatus = "";
     @When("The tester changes to defect to any status")
     public void the_tester_changes_to_defect_to_any_status() {
-        // click on defect status
 
-        // click change status
         homePage.changeStatusBtn.click();
+        ogStatus = homePage.originalStatus.getText();
+        System.out.println("Original status:" + ogStatus);
+        for(int i=0; i<homePage.statusBtns.size(); i++){
+            WebElement statusBtn = homePage.statusBtns.get(i);
+            if(!statusBtn.getText().equals(ogStatus)){
+                newStatus = statusBtn.getText();
+                System.out.println("New status:" + newStatus);
+                statusBtn.click();
+                break;
+            }
+        }
 
-        // check original status?
-        String ogStatus = homePage.originalStatus.getText();
-
-        System.out.println(ogStatus);
-        // click on any status other than original ones
     }
     @Then("The tester should see the defect has a different status")
     public void the_tester_should_see_the_defect_has_a_different_status() {
-        System.out.println("To Be Implemented");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.refreshed
+                (ExpectedConditions.textToBePresentInElement
+                        (driver.findElement(By.xpath("(//p/b[2])[1]")),newStatus)));
+        assertNotEquals(ogStatus, newStatus);
     }
 
 

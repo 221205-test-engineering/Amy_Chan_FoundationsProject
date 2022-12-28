@@ -42,7 +42,6 @@ public class AssignDefectImpl {
     @When("The manager clicks assign")
     public void the_manager_clicks_assign() {
         firstDefectID = driver.findElement(By.xpath("//*[@id=\"root\"]/table/tbody/tr[1]/td[1]")).getText();
-        System.out.println(firstDefectID);
         homePage.assignBtn.click();
     }
     @Then("The defect should disappear from the list")
@@ -50,7 +49,6 @@ public class AssignDefectImpl {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.invisibilityOf(homePage.boldText));
         String newFirstDefectID = driver.findElement(By.xpath("//*[@id=\"root\"]/table/tbody/tr[1]/td[1]")).getText();
-        System.out.println(newFirstDefectID);
         assertNotEquals(firstDefectID, newFirstDefectID);
     }
 

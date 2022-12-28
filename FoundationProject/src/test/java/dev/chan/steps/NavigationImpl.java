@@ -37,8 +37,7 @@ public class NavigationImpl {
     public void the_manager_is_on_the_home_page() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOf(homePage.welcomeMsg));
-        String managerHomeTitle = driver.getTitle();
-        System.out.println("Manager is now on :" + managerHomeTitle);
+
     }
 
     // For Scenario: Homepage links visible

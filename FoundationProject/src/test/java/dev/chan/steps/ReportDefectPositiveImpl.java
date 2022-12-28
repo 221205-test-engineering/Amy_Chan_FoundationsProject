@@ -42,9 +42,6 @@ public class ReportDefectPositiveImpl {
         LocalDate today = java.time.LocalDate.now(); // YYYY-MM-DD
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         String date = today.format(formatter);
-
-        System.out.println("Today is: "+ date);
-
         defectReporterPage.datePicker.sendKeys(date);
     }
     @When("The employee types in Description with")

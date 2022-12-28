@@ -57,7 +57,7 @@ public class MatrixImpl {
                 .until(ExpectedConditions.alertIsPresent());
 
         String alertMsg = driver.switchTo().alert().getText();
-        System.out.println(alertMsg);
+
         driver.switchTo().alert().accept();
         assertTrue(alertMsg.contains("Matrix with ID "));
     }
@@ -66,7 +66,6 @@ public class MatrixImpl {
     @Given("The manager is on the matrix homepage")
     public void the_manager_is_on_the_matrix_homepage() {
         homePage.matricesLink.click();
-        System.out.println(driver.getTitle());
     }
 
     @Given("The manager has selected the matrix")
